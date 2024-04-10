@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 //import { Icons } from "@/components/icons";
 import {
@@ -12,6 +12,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { Input } from "@/components/ui/input";
 
 const components = [
   {
@@ -51,7 +52,15 @@ const components = [
   },
 ];
 
-function Actions() {
+function Actions({ addStage }) {
+  const [stageName, setStageName] = useState("");
+
+  const handleAddStage = () => {
+    addStage(stageName);
+    setStageName("");
+
+    console.log(stageName);
+  };
   return (
     <div className="p-2 bg-gray-100 m-2 rounded-lg">
       <NavigationMenu>
@@ -68,51 +77,85 @@ function Actions() {
                     >
                       {/* <Icons.logo className="h-6 w-6" /> */}
                       <div className="mb-2 mt-4 text-lg font-medium">
-                        shadcn/ui
+                        Stages
                       </div>
                       <p className="text-sm leading-tight text-muted-foreground">
-                        Beautifully designed components that you can copy and
-                        paste into your apps. Accessible. Customizable. Open
-                        Source.
+                        Stages allow you to created more personalization for
+                        your clients helping you grow more.
+                        <p className="text-xs text-red-400">
+                          * You can create upto 5 categories
+                        </p>
                       </p>
                     </a>
                   </NavigationMenuLink>
                 </li>
-                <ListItem href="/docs" title="Introduction">
-                  Re-usable components built using Radix UI and Tailwind CSS.
-                </ListItem>
-                <ListItem href="/docs/installation" title="Installation">
-                  How to install dependencies and structure your app.
-                </ListItem>
-                <ListItem href="/docs/primitives/typography" title="Typography">
-                  Styles for headings, paragraphs, lists...etc
-                </ListItem>
+                <div>
+                  <h1 className="font-semibold">Enter Details</h1>
+                  <Input
+                    type="string"
+                    placeholder="Stage Name"
+                    className="mt-4"
+                    value={stageName}
+                    onChange={(e) => setStageName(e.target.value)}
+                  />
+                  <button
+                    onClick={handleAddStage}
+                    className="w-full bg-black text-white p-2 mt-4 rounded-lg"
+                  >
+                    Submit
+                  </button>
+                </div>
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuTrigger>Add New Profile</NavigationMenuTrigger>
             <NavigationMenuContent>
-              <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                {components.map((component) => (
-                  <ListItem
-                    key={component.title}
-                    title={component.title}
-                    href={component.href}
-                  >
-                    {component.description}
-                  </ListItem>
-                ))}
+              <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                <li className="row-span-3">
+                  <NavigationMenuLink asChild>
+                    <a
+                      className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                      href="/"
+                    >
+                      {/* <Icons.logo className="h-6 w-6" /> */}
+                      <div className="mb-2 mt-4 text-lg font-medium">
+                        New User
+                      </div>
+                      <p className="text-sm leading-tight text-muted-foreground">
+                        New Profile allow you to add in Profiles of your clients
+                        <p className="text-xs text-red-400">
+                          * Upto 100 users allowed on Free Tier
+                        </p>
+                      </p>
+                    </a>
+                  </NavigationMenuLink>
+                </li>
+                <div>
+                  <h1 className="font-semibold">Enter Details</h1>
+                  <Input
+                    type="string"
+                    placeholder="Full Name"
+                    className="mt-4"
+                  />
+                  <Input type="email" placeholder="Email" className="mt-4" />
+                  <Input
+                    type="number"
+                    placeholder="Phone Number"
+                    className="mt-4"
+                  />
+                  <Input
+                    type="string"
+                    placeholder="Stage Name"
+                    className="mt-4"
+                  />
+                  <button className="w-full bg-black text-white p-2 mt-4 rounded-lg">
+                    Submit
+                  </button>
+                </div>
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
-          {/* <NavigationMenuItem>
-          <div href="https://www.getsaral.com/" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              About Us
-            </NavigationMenuLink>
-          </div>
-        </NavigationMenuItem> */}
         </NavigationMenuList>
       </NavigationMenu>
     </div>
