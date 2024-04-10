@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const Signup = () => {
   return (
-    <div className="grid grid-cols-2">
+    <div className="grid lg:grid-cols-2">
       <div className="h-screen flex justify-center flex-col">
         <div className="flex justify-center ">
           <div className="p-12 rounded-lg bg-slate-200">
@@ -61,7 +61,10 @@ const Signup = () => {
         </div>
       </div>
       <div className="h-screen bg-slate-200 ">
-        <img src="https://assets-global.website-files.com/65ce4e0201655254962ec579/65f8b0d0830242eacf1faf67_ebook-home-p-800.webp"></img>
+        <img
+          className="pt-12"
+          src="https://assets-global.website-files.com/65ce4e0201655254962ec579/65f8b0d0830242eacf1faf67_ebook-home-p-800.webp"
+        ></img>
       </div>
     </div>
   );
