@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
-//import { Icons } from "@/components/icons";
+import { Button } from "@/components/ui/button";
+import { Check, ChevronsUpDown } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -13,6 +14,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Input } from "@/components/ui/input";
+import { ComboboxDemo } from "./Combobox";
 
 const components = [
   {
@@ -52,8 +54,13 @@ const components = [
   },
 ];
 
-function Actions({ addStage }) {
+function Actions({ addStage, stagesarr }) {
   const [stageName, setStageName] = useState("");
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(!open);
+  };
 
   const handleAddStage = () => {
     addStage(stageName);
@@ -144,11 +151,31 @@ function Actions({ addStage }) {
                     placeholder="Phone Number"
                     className="mt-4"
                   />
-                  <Input
-                    type="string"
-                    placeholder="Stage Name"
-                    className="mt-4"
-                  />
+                  <button
+                    className="border-2 p-2 mt-4 rounded-lg w-full"
+                    onClick={handleOpen}
+                  >
+                    Select Stage
+                    {open ? (
+                      <ul className="grid gap-3 p-6 ">
+                        {stagesarr.map((stage, index) => (
+                          <li key={index}>
+                            <button
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                              onClick={() => {
+                                // Handle the selection of the stage here
+                                console.log("Selected stage:", stage);
+                              }}
+                            >
+                              <div className="text-sm font-medium flex-col">
+                                {stage}
+                              </div>
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </button>
                   <button className="w-full bg-black text-white p-2 mt-4 rounded-lg">
                     Submit
                   </button>

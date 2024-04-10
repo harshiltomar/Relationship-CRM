@@ -2,8 +2,8 @@ import React from "react";
 
 const Sidebar = () => {
   return (
-    <div className="h-full bg-black text-white font-semibold">
-      <div className="p-4 flex pb-8 border-b-2 border-gray-700">
+    <div className="h-screen fixed bg-black text-white font-semibold">
+      <div className="pl-4 pt-6 flex pb-4 border-b border-gray-900">
         <img src="src/assets/saral.png" className="h-12 w-12" />
         <h2 className="text-xl pt-2 font-semibold">SARAL</h2>
       </div>

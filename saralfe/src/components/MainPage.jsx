@@ -19,7 +19,7 @@ const MainPage = () => {
   return (
     <div className="h-screen flex-col ">
       <Header />
-      <Actions addStage={addStage} />
+      <Actions addStage={addStage} stagesarr={stagesarr} />
       <div className="grid grid-cols-5">
         {stagesarr.map((stage, index) => (
           <StagesCard key={index} title={stage} number={index * 100} />
