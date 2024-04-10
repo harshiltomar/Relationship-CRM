@@ -9,11 +9,11 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="grid grid-cols-5">
-      <div className="col-span-1">
+    <div className="grid grid-cols-12">
+      <div className="col-span-2">
         <SidebarMenu />
       </div>
-      <div className="col-span-4">
+      <div className="col-span-10">
         <MainPage />
       </div>
     </div>
