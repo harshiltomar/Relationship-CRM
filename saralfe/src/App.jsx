@@ -4,18 +4,20 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import SidebarMenu from "./components/Sidebar";
 import MainPage from "./components/MainPage";
+import { Input } from "./components/ui/input";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Signup from "./Signup";
+import Home from "./Home";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <div className="grid grid-cols-12">
-      <div className="col-span-2">
-        <SidebarMenu />
-      </div>
-      <div className="col-span-10">
-        <MainPage />
-      </div>
+    <div>
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Signup />} />
+          <Route path="/home" element={<Home />} />
+        </Routes>
+      </Router>
     </div>
   );
 }

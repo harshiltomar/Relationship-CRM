@@ -16,58 +16,79 @@ import {
 import { Input } from "@/components/ui/input";
 import { ComboboxDemo } from "./Combobox";
 
-const components = [
-  {
-    title: "Alert Dialog",
-    href: "/docs/primitives/alert-dialog",
-    description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
-  },
-  {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
-    description:
-      "For sighted users to preview content available behind a link.",
-  },
-  {
-    title: "Progress",
-    href: "/docs/primitives/progress",
-    description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-  },
-  {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
-    description: "Visually or semantically separates content.",
-  },
-  {
-    title: "Tabs",
-    href: "/docs/primitives/tabs",
-    description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-  },
-  {
-    title: "Tooltip",
-    href: "/docs/primitives/tooltip",
-    description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
-  },
-];
-
 function Actions({ addStage, stagesarr }) {
   const [stageName, setStageName] = useState("");
   const [open, setOpen] = React.useState(false);
+
+  //POSTING CODE:
+  const [stageInput, setStageInputs] = useState({ name: "" });
+  const [Inputs, setInputs] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    stage: "",
+  });
 
   const handleOpen = () => {
     setOpen(!open);
   };
 
   const handleAddStage = () => {
+    if (stagesarr.length == 10) {
+      alert("Stage limit is 5 only");
+      return;
+    }
     addStage(stageName);
     setStageName("");
 
+    submitStage(stageName);
     console.log(stageName);
   };
+
+  const renderCard = () => {};
+
+  const submitProfile = async () => {
+    if (!Inputs.name || !Inputs.email || !Inputs.phone) {
+      alert("Please fill in all the fields");
+    }
+
+    try {
+      await axios
+        .post("http:localhost:3000/api/profile/create", {
+          name: Inputs.name,
+          email: Inputs.email,
+          phone: Inputs.phone,
+          stage: {
+            /*NEED TO FIGURE OUT */
+          },
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .then(renderCard());
+    } catch (error) {
+      console.error("User not created", error);
+    }
+  };
+
+  const submitStage = async () => {
+    if (stageInput.name === "") {
+      alert("Stage Name is Missing");
+    }
+
+    try {
+      await axios
+        .post("http:localhost:3000/api/stage/create", {
+          name: Inputs.name,
+        })
+        .then((response) => {
+          console.log(response);
+        });
+    } catch (error) {
+      console.error("Error in Stage Creation");
+    }
+  };
+
   return (
     <div className="p-2 bg-gray-100 m-2 rounded-lg">
       <NavigationMenu>
