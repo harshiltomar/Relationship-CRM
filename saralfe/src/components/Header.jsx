@@ -1,5 +1,7 @@
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { DropdownMenu } from "@radix-ui/react-dropdown-menu";
+import { DropdownMenuDemo } from "./DropDownMenu";
 
 const Header = () => {
   return (
@@ -10,7 +12,9 @@ const Header = () => {
           <AvatarImage src="https://github.com/shadcn.png" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
-        <h1 className="p-2 bg-gray-300 rounded-lg mx-1">Harshil &rarr;</h1>
+        <div className="ml-2 bg-slate-200">
+          <DropdownMenuDemo />
+        </div>
       </div>
     </div>
   );

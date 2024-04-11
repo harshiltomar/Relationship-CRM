@@ -22,12 +22,10 @@ function Actions({ addStage, stagesarr }) {
 
   //POSTING CODE:
   const [stageInput, setStageInputs] = useState({ name: "" });
-  const [Inputs, setInputs] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    stage: "",
-  });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [selectedStage, setSelectedStage] = useState("");
 
   const handleOpen = () => {
     setOpen(!open);
@@ -45,7 +43,10 @@ function Actions({ addStage, stagesarr }) {
     console.log(stageName);
   };
 
-  const renderCard = () => {};
+  const handleProfileSubmit = () => {
+    console.log("Profile vai");
+    console.log("Info is", name, email, phone, selectedStage);
+  };
 
   const submitProfile = async () => {
     if (!Inputs.name || !Inputs.email || !Inputs.phone) {
@@ -73,7 +74,7 @@ function Actions({ addStage, stagesarr }) {
 
   const submitStage = async () => {
     if (stageInput.name === "") {
-      alert("Stage Name is Missing");
+      //alert("Stage Name is Missing");
     }
 
     try {
@@ -162,12 +163,19 @@ function Actions({ addStage, stagesarr }) {
                 <div>
                   <h1 className="font-semibold">Enter Details</h1>
                   <Input
+                    onChange={(e) => setName(e.target.value)}
                     type="string"
                     placeholder="Full Name"
                     className="mt-4"
                   />
-                  <Input type="email" placeholder="Email" className="mt-4" />
                   <Input
+                    onChange={(e) => setEmail(e.target.value)}
+                    type="email"
+                    placeholder="Email"
+                    className="mt-4"
+                  />
+                  <Input
+                    onChange={(e) => setPhone(e.target.value)}
                     type="number"
                     placeholder="Phone Number"
                     className="mt-4"
@@ -186,6 +194,7 @@ function Actions({ addStage, stagesarr }) {
                               onClick={() => {
                                 // Handle the selection of the stage here
                                 console.log("Selected stage:", stage);
+                                setSelectedStage(stage);
                               }}
                             >
                               <div className="text-sm font-medium flex-col">
@@ -197,7 +206,10 @@ function Actions({ addStage, stagesarr }) {
                       </ul>
                     ) : null}
                   </button>
-                  <button className="w-full bg-black text-white p-2 mt-4 rounded-lg">
+                  <button
+                    onClick={handleProfileSubmit}
+                    className="w-full bg-black text-white p-2 mt-4 rounded-lg"
+                  >
                     Submit
                   </button>
                 </div>
