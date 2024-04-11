@@ -16,7 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { ComboboxDemo } from "./Combobox";
 
-function Actions({ addStage, stagesarr }) {
+function Actions({ addStage, stagesarr, profilearr, addProfile }) {
   const [stageName, setStageName] = useState("");
   const [open, setOpen] = React.useState(false);
 
@@ -32,10 +32,11 @@ function Actions({ addStage, stagesarr }) {
   };
 
   const handleAddStage = () => {
-    if (stagesarr.length == 10) {
+    if (stagesarr.length >= 10) {
       alert("Stage limit is 5 only");
       return;
     }
+
     addStage(stageName);
     setStageName("");
 
@@ -44,10 +45,20 @@ function Actions({ addStage, stagesarr }) {
   };
 
   const handleProfileSubmit = () => {
+    addProfile({
+      name: name,
+      email: email,
+      contact: phone,
+      stage: selectedStage,
+    });
+
+    //
     console.log("Profile vai");
     console.log("Info is", name, email, phone, selectedStage);
+    console.log(profilearr);
   };
 
+  // POST PROFILE
   const submitProfile = async () => {
     if (!Inputs.name || !Inputs.email || !Inputs.phone) {
       alert("Please fill in all the fields");
@@ -72,6 +83,7 @@ function Actions({ addStage, stagesarr }) {
     }
   };
 
+  // POST STAGE
   const submitStage = async () => {
     if (stageInput.name === "") {
       //alert("Stage Name is Missing");
