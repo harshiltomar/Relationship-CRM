@@ -38,19 +38,40 @@ const MainPage = () => {
       stage: "On boarded",
     },
     {
-      name: "Supriya",
-      email: "supriya20@gmail.com",
+      name: "Muskan",
+      email: "muskan20@gmail.com",
       contact: 9158977078,
       stage: "Rejected",
     },
   ]);
 
+  const transferStageFn = (transferStage, profileIndex) => {
+    const updatedProfile = {
+      ...profilearr[profileIndex],
+      stage: transferStage,
+    };
+
+    // Create a new profilearr array with the updated profile
+    const updatedProfileArr = [
+      ...profilearr.slice(0, profileIndex),
+      updatedProfile,
+      ...profilearr.slice(profileIndex + 1),
+    ];
+
+    // Update the state with the new profilearr
+    setProfilearr(updatedProfileArr);
+
+    // Reset the selectedProfile and transferStage state variables if needed
+    setSelectedProfile("");
+    setTransferStage("");
+  };
+
   const addStage = (newStage) => {
     setStagesarr([...stagesarr, newStage]);
   };
 
-  const addProfile = ({ newProfile }) => {
-    setProfilearr([...profilearr, { newProfile }]);
+  const addProfile = (newProfile) => {
+    setProfilearr([...profilearr, newProfile]);
   };
 
   return (
@@ -61,6 +82,7 @@ const MainPage = () => {
         stagesarr={stagesarr}
         addProfile={addProfile}
         profilearr={profilearr}
+        transferStageFn={transferStageFn}
       />
       <div className="grid grid-cols-5">
         {stagesarr.map((stage, index) => (
